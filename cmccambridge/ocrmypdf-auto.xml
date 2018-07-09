@@ -18,7 +18,7 @@
   <Category>Productivity: Status:Stable</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/cmccambridge/unraid-templates/master/cmccambridge/ocrmypdf-auto.xml</TemplateURL>
-  <Icon/>
+  <Icon>https://raw.githubusercontent.com/cmccambridge/ocrmypdf-auto/master/media/logo.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <DateInstalled/>
