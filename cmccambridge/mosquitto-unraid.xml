@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>mosquitto</Name>
-  <Repository>cmccambridge/mosquitto-unraid:1.5.8</Repository>
+  <Repository>cmccambridge/mosquitto-unraid:latest</Repository>
   <Registry>https://hub.docker.com/r/cmccambridge/mosquitto-unraid/</Registry>
   <Network>bridge</Network>
   <MyIP/>
