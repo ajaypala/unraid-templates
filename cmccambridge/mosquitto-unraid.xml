@@ -15,6 +15,12 @@
 [p]To further control mosquitto configuration, place a [code]mosquitto.conf[/code] file in the config path, or start the container one time and it will write a template [code]mosquitto.conf.example[/code] file to the config path for you to copy and edit. For further details, refer to the full README at [a href='https://github.com/cmccambridge/mosquitto-unraid/blob/master/README.md']https://github.com/cmccambridge/mosquitto-unraid/blob/master/README.md[/a][/p]&#xD;
 &#xD;
 </Overview>
+  <Changes>
+[h3]2021.01.19[/h3]
+- Update to Mosquitto 2.0.5
+- [h2]Breaking Change with 2.0.0+[/h2]
+- Starting with Mosquitto 2.0.0, you will need to set the [code]RUN_INSECURE_MQTT_SERVER[/code] variable to [code]1[/code], or explicitly configure at least one listener, or the container will terminate with an error. See the [a href='https://github.com/cmccambridge/mosquitto-unraid/blob/master/README.md#breaking-change']Breaking Change documentation[/a] for details!
+</Changes>
   <Category>HomeAutomation:</Category>
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/cmccambridge/unraid-templates/master/cmccambridge/mosquitto-unraid.xml</TemplateURL>
@@ -68,11 +74,18 @@
       <Mode>rw</Mode>
     </Volume>
   </Data>
-  <Environment/>
+  <Environment>
+    <Variable>
+      <Value>0</Value>
+      <Name>RUN_INSECURE_MQTT_SERVER</Name>
+      <Mode/>
+    </Variable>
+  </Environment>
   <Labels/>
   <Config Name="Config Directory" Target="/mosquitto/config" Default="/mnt/user/appdata/mosquitto" Mode="rw" Description="Store &amp;lt;code&amp;gt;mosquitto.conf&amp;lt;/code&amp;gt; (or additional &amp;lt;code&amp;gt;*.conf&amp;lt;/code&amp;gt; files). &amp;lt;em&amp;gt;Container Path: &amp;lt;code&amp;gt;/mosquitto/config&amp;lt;/code&amp;gt;&amp;lt;/em&amp;gt;" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mosquitto</Config>
   <Config Name="Persistent Data Directory" Target="/mosquitto/data" Default="" Mode="rw" Description="&amp;lt;em&amp;gt;(Optional)&amp;lt;/em&amp;gt; Store persistent MQTT data. &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; Persistent data must be enabled in the &amp;lt;code&amp;gt;mosquitto.conf&amp;lt;/code&amp;gt; config file. &amp;lt;em&amp;gt;Container Path: &amp;lt;code&amp;gt;/mosquitto/data&amp;lt;/code&amp;gt;&amp;lt;/em&amp;gt;" Type="Path" Display="always" Required="false" Mask="false"/>
   <Config Name="Log Directory" Target="/mosquitto/log" Default="" Mode="rw" Description="&amp;lt;em&amp;gt;(Optional)&amp;lt;/em&amp;gt; Store mosquitto logs. &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; Logs must be enabled in the &amp;lt;code&amp;gt;mosquitto.conf&amp;lt;/code&amp;gt; config file. &amp;lt;em&amp;gt;Container Path: &amp;lt;code&amp;gt;/mosquitto/log&amp;lt;/code&amp;gt;&amp;lt;/em&amp;gt;" Type="Path" Display="always" Required="false" Mask="false"/>
+  <Config Name="Run Insecure MQTT Server" Target="RUN_INSECURE_MQTT_SERVER" Default="0" Mode="" Description="Set to &amp;lt;code&amp;gt;1&amp;lt;/code&amp;gt; to enable anonymous connections on port 1883 as in Mosquitto 1.x" Type="Variable" Display="always" Required="true" Mask="false">0</Config>
   <Config Name="Host Port: MQTT Server" Target="1883" Default="1883" Mode="tcp" Description="MQTT Server Port. &amp;lt;em&amp;gt;Container Port: &amp;lt;code&amp;gt;1883&amp;lt;/code&amp;gt;&amp;lt;/em&amp;gt;" Type="Port" Display="always" Required="true" Mask="false">1883</Config>
   <Config Name="Host Port: MQTT TLS" Target="8883" Default="" Mode="tcp" Description="&amp;lt;em&amp;gt;(Optional)&amp;lt;/em&amp;gt; MQTT-TLS Server Port  &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; TLS must be configured in the &amp;lt;code&amp;gt;mosquitto.conf&amp;lt;/code&amp;gt; config file. &amp;lt;em&amp;gt;Container Port: &amp;lt;code&amp;gt;8883&amp;lt;/code&amp;gt;&amp;lt;/em&amp;gt;" Type="Port" Display="always" Required="false" Mask="false"/>
   <Config Name="Host Port: MQTT Websockets" Target="9001" Default="" Mode="tcp" Description="&amp;lt;em&amp;gt;(Optional)&amp;lt;/em&amp;gt; MQTT Websockets Server Port.  &amp;lt;strong&amp;gt;Note:&amp;lt;/strong&amp;gt; Websockets must be enabled in the &amp;lt;code&amp;gt;mosquitto.conf&amp;lt;/code&amp;gt; config file. &amp;lt;em&amp;gt;Container Port: &amp;lt;code&amp;gt;9001&amp;lt;/code&amp;gt;&amp;lt;/em&amp;gt;" Type="Port" Display="always" Required="false" Mask="false"/>
