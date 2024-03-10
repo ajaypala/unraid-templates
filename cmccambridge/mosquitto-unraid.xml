@@ -25,7 +25,7 @@
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/cmccambridge/unraid-templates/master/cmccambridge/mosquitto-unraid.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/cmccambridge/mosquitto-unraid/master/media/eclipse-mosquitto.png</Icon>
-  <ExtraParams/>
+  <ExtraParams>--user=99:100</ExtraParams>
   <PostArgs/>
   <CPUset/>
   <DateInstalled>1541646811</DateInstalled>
